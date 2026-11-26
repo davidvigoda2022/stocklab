@@ -9,7 +9,10 @@ import {
   Settings,
   Truck,
 } from 'lucide-react'
+import Link from 'next/link'
 import { cn } from '@/lib/utils'
+
+export type SidebarPage = 'catalogue' | 'lots'
 
 const NAV = [
   {
@@ -20,14 +23,14 @@ const NAV = [
     label: 'Stock',
     items: [
       { label: 'Inventaire', icon: Boxes },
-      { label: 'Lots & péremptions', icon: CalendarClock },
+      { label: 'Lots & péremptions', icon: CalendarClock, href: '/lots', page: 'lots' },
       { label: 'Mouvements', icon: ArrowLeftRight },
     ],
   },
   {
     label: 'Référentiel',
     items: [
-      { label: 'Catalogue', icon: BookOpenText, active: true },
+      { label: 'Catalogue', icon: BookOpenText, href: '/', page: 'catalogue' },
       { label: 'Fournisseurs', icon: Truck },
     ],
   },
@@ -37,7 +40,7 @@ const NAV = [
   },
 ]
 
-export function AppSidebar() {
+export function AppSidebar({ active: activePage = 'catalogue' }: { active?: SidebarPage }) {
   return (
     <aside className="sticky top-0 flex h-svh w-60 shrink-0 flex-col bg-sidebar text-sidebar-foreground">
       <div className="flex items-center gap-2.5 px-5 py-5">
@@ -59,11 +62,12 @@ export function AppSidebar() {
             <ul className="flex flex-col gap-0.5">
               {group.items.map((item) => {
                 const Icon = item.icon
-                const active = 'active' in item && item.active
+                const active = 'page' in item && item.page === activePage
+                const href = ('href' in item && item.href) || '#'
                 return (
                   <li key={item.label}>
-                    <a
-                      href="#"
+                    <Link
+                      href={href}
                       aria-current={active ? 'page' : undefined}
                       className={cn(
                         'flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors hover:bg-sidebar-accent hover:text-white',
@@ -75,7 +79,7 @@ export function AppSidebar() {
                         aria-hidden="true"
                       />
                       {item.label}
-                    </a>
+                    </Link>
                   </li>
                 )
               })}

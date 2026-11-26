@@ -4,7 +4,7 @@ import { CatalogueView } from '@/components/stocklab/catalogue-view'
 export default function Page() {
   return (
     <div className="flex min-h-svh">
-      <AppSidebar />
+      <AppSidebar active="catalogue" />
       <CatalogueView />
     </div>
   )

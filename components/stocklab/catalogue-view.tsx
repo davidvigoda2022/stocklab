@@ -145,7 +145,7 @@ export function CatalogueView() {
           </span>
           <span className="inline-flex items-center gap-1.5">
             <Info className="size-3.5" aria-hidden="true" />
-            Les quantités, lots et dates de péremption se consultent dans Stock › Inventaire.
+            Les lots et dates de péremption se consultent dans Stock › Lots &amp; péremptions.
           </span>
         </div>
       </section>
